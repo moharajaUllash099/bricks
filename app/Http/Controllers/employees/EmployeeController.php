@@ -47,7 +47,7 @@ class EmployeeController extends Controller
                 'all_countries'                 =>  DB::table('countries')->get(),
                 'branches'                      =>  DB::table('branches')->where('status','0')->get(),
                 'alerts'                        =>  [
-                    'info'                      =>  ' Fields with (*) are required.'
+                    'warning'                      =>  'তারকা (*) চিহ্নিত ফিল্ড গুলো অবশ্যই পূরণ করতে হবে'
                 ],
             ]);
 
@@ -121,41 +121,47 @@ class EmployeeController extends Controller
                 return '<img src="'.$img.'" class="img-rounded img-responsive" style="height: 90px;">';
             })
             ->editColumn('name',function ($data){
-                $html = $data->name.'<br>Date of Birth : ';
-                $html.= date('d M, Y',strtotime($data->dob)).'<br> Joining Date: '.date('d M, Y',strtotime($data->joining_date));
-                $html.= 'Designation : '.get_designation($data->designation);
+                $html = $data->name.'<br>জন্ম তারিখ : ';
+                $html.= date('d M, Y',strtotime($data->dob)).'<br> যোগদান : '.date('d M, Y',strtotime($data->joining_date));
+                $html.= '<br>পদবী : '.get_designation($data->designation);
                 return $html;
             })
             ->editColumn('branch',function ($data){
                 return get_branch_name($data->branch);
             })
             ->editColumn('personal_mobile',function ($data){
-                $html = '<strong>Phone : </strong> '.$data->personal_mobile;
+                $html = '<strong>মোবাইল </strong> <br>
+                    ব্যক্তিগত : '.$data->personal_mobile;
                 if(!empty($data->alt_mobile))
-                    $html.= '<br><strong>Alt Phone : </strong>'.$data->alt_mobile;
+                    $html.= '<br><strong>বিকল্প : </strong>'.$data->alt_mobile;
                 if(!empty($data->alt_mobile))
-                    $html .= '<br><strong>Email  : </strong>'.$data->email;
+                    $html .= '<br><strong>ইমেইল  : </strong>'.$data->email;
                 if(!empty($data->alt_mobile))
-                    $html .= '<br><strong>NID/Passport/Driving License : </strong>'.$data->nid;
+                    $html .= '<br><strong>NID/পাসপোর্ট / ড্রাইভিং লাইসেন্স : </strong>'.$data->nid;
                 return $html;
             })
             ->editColumn('country',function ($data){
-                $html = '<strong>Country : </strong>'.get_country($data->country);
+                $html = '<strong>দেশ : </strong>'.get_country($data->country);
                 if(!empty($data->city))
-                    $html.= '<br><strong>City : </strong> '.ucwords($data->city);
+                    $html.= '<br><strong>শহর : </strong> '.ucwords($data->city);
                 if(!empty($data->area))
-                    $html.= '<br><strong>Area : </strong>'.ucwords($data->area);
+                    $html.= '<br><strong>এলাকায় : </strong>'.ucwords($data->area);
                 if(!empty($data->post_code))
-                    $html.= '<br><strong>Post Code : </strong>'.ucwords($data->post_code);
+                    $html.= '<br><strong>পোস্ট কোড : </strong>'.ucwords($data->post_code);
                 if(!empty($data->house_address))
-                    $html.= '<br><strong>House & Street Address : </strong>'.ucwords($data->house_address);
+                    $html.= '<br><strong>বাড়ীর নাম ও ঠিকানা : </strong>'.ucwords($data->house_address);
 
                 return $html;
             })
             ->editColumn('created_at',function ($data){
-                $html = '<br><strong>Created at : </strong> '.date('d-M-Y',strtotime($data->created_at));
+                /*$html = '<br><strong>Created at : </strong> '.date('d-M-Y',strtotime($data->created_at));
                 if($data->created_at != $data->updated_at) {
                     $html.= '<br><strong>Created at : </strong> '.date('d-M-Y',strtotime($data->updated_at));
+                }*/
+
+                $html = '<br><strong>তৈরী হয়েছে : </strong> '.date('d-M-Y',strtotime($data->created_at));
+                if($data->created_at != $data->updated_at) {
+                    $html.= '<br><strong>হালনাগাদ হয়েছে : </strong> '.date('d-M-Y',strtotime($data->updated_at));
                 }
 
                 return $html;
@@ -166,12 +172,12 @@ class EmployeeController extends Controller
 
                 $html = '<div class="btn-group pull-right">
                             <button data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle" style="margin-left: -55px; color: #000 !important; font-weight: bold" aria-expanded="false">
-                                Action <span class="caret"></span>
+                                অ্যাকশন <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="'.$detail_url.'">
-                                        Edit
+                                        হালনাগাদ
                                     </a>
                                 </li>
                                 <li>
@@ -223,7 +229,7 @@ class EmployeeController extends Controller
         //debug($data,1);
         Employee::create($data);
         set_notification('Register a new employee ('.$request->name.') .');
-        return back()->with('success_','Successfully created!');
+        return back()->with('success_','সফলভাবে সম্পন্ন হয়েছে !');
     }
 
     public function print_info()
@@ -245,13 +251,18 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         if (have_permission([1,2])){
-            $this->addViewData([
-                'all_countries'         =>  DB::table('countries')->get(),
-                'branches'              =>  DB::table('branches')->where('status','0')->get(),
-                'this_record'           =>  DB::table('employees')->where('id',$id)->get(),
-                'alerts'                =>  [],
-            ]);
-            return view('employee.add_employee')->with($this->viewData);
+            $employee = Employee::find($id);
+            if(!empty($employee)){
+                $this->addViewData([
+                    'all_countries'         =>  DB::table('countries')->get(),
+                    'branches'              =>  DB::table('branches')->where('status','0')->get(),
+                    'this_record'           =>  Employee::where('id',$id)->get(),
+                    'alerts'                =>  [],
+                ]);
+                return view('employee.add_employee')->with($this->viewData);
+            }else{
+                return back()->with('error_', 'কোন তথ্য পাওয়া যায়নি !');
+            }
         }else{
             return redirect('/')->with('error_','you maybe lost');
         }
@@ -268,10 +279,10 @@ class EmployeeController extends Controller
             'dob'               => 'required|max:190',
             'joining_date'      => 'required|max:190',
 
-            'personal_mobile'   => 'required|min:11|max:12|unique:customer_infos,personal_mobile,'.$id,
+            'personal_mobile'   => 'required|min:11|max:12|unique:employees,personal_mobile,'.$id,
             'alt_mobile'        => 'max:190',
-            'nid'               => 'max:190|nullable|unique:customer_infos,nid,'.$id,
-            'email'             => 'max:190|nullable|unique:customer_infos,email,'.$id,
+            'nid'               => 'max:190|nullable|unique:employees,nid,'.$id,
+            'email'             => 'max:190|nullable|unique:employees,email,'.$id,
             'country'           => 'required|max:190',
             'city'              => 'required|max:190',
             'area'              => 'required|max:190',
@@ -334,10 +345,10 @@ class EmployeeController extends Controller
             set_notification('update employee information ('.$request->name.')');
 
             $redirect =  route('employee.all');
-            return redirect($redirect)->with('success_','Successfully updated.');
+            return redirect($redirect)->with('success_','সফলভাবে হালনাগাদ সম্পন্ন হয়েছে !');
         }
         else{
-            return back()->with('error_', 'There is no record found');
+            return back()->with('error_', 'কোন তথ্য পাওয়া যায়নি !');
         }
     }
 

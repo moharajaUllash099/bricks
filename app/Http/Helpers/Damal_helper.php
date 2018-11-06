@@ -154,7 +154,8 @@ if (!function_exists('get_employee')){
 if (!function_exists('get_branch_name')){
     function get_branch_name($id){
         if ($id == 0 ){
-            return 'Principal Branch';
+            //return 'Principal Branch';
+            return 'প্রাধান শাখা';
         }else{
             $role = DB::table('branches')->where('id', $id)->get();
             if(isset($role[0])){

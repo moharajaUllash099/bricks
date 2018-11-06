@@ -323,13 +323,13 @@
                 </div>
                 <div class="col-md-4 hidden-xs">
                     <div class="pull-right">
-                        <strong>RS-AI-v.0.1.9</strong>
+                        <strong>RS-BI-v.0.1.1</strong>
                     </div>
                 </div>
             </div>
             {{--
                 RS  =   Rowshan soft
-                AI  =   Agro Industry
+                BI  =   Bricks Industry
                 v-*.* =   Version
                 --}}
         </div>

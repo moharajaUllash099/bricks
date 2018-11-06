@@ -11,8 +11,8 @@ $default_joining_date = (!empty(old('joining_date'))) ? old('joining_date') : da
 $default_country = (!empty(old('country'))) ? old('country') : 16;
 
 $all_branch = [
-    ''      =>      'Select Branch',
-    '0'     =>      'Principal Branch',
+    ''      =>      'শাখা নির্বাচন করুন',
+    '0'     =>      'প্রাধান শাখা',
 ];
 foreach ($branches as $b){
     $all_branch[$b->id] =  $b->name;
@@ -24,7 +24,10 @@ $img = (isset($this_record[0])) ? $this_record[0]->img : '';
 $name = (isset($this_record[0])) ? $this_record[0]->name : old('name');
 
 $branch = (isset($this_record[0])) ? $this_record[0]->branch : old('branch');
+
 $designation = (isset($this_record[0])) ? $this_record[0]->designation : old('designation');
+$designation_value = (!empty($designation)) ? [$designation => get_designation($designation)] : [];
+
 $personal_mobile = (isset($this_record[0])) ? $this_record[0]->personal_mobile : old('personal_mobile');
 $alt_mobile = (isset($this_record[0])) ? $this_record[0]->alt_mobile : old('alt_mobile');
 $nid = (isset($this_record[0])) ? $this_record[0]->nid : old('nid');
@@ -35,6 +38,8 @@ $area = (isset($this_record[0])) ? $this_record[0]->area : old('area');
 $post_code = (isset($this_record[0])) ? $this_record[0]->post_code : old('post_code');
 $house_address = (isset($this_record[0])) ? $this_record[0]->house_address : old('house_address');
 $comment = (isset($this_record[0])) ? $this_record[0]->comment : old('comment');
+
+
 
 $id = (isset($this_record[0])) ? $this_record[0]->id : '';
 ?>
@@ -78,7 +83,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
     </div>
     <div class="row">
         <div class="col-xs-12">
-            @panelPrimary(['title'=>(empty($id)) ? 'Add new employee' : 'update employee info' ])
+            @panelPrimary(['title'=>(empty($id)) ? 'নতুন কর্মচারী ফর্ম' : 'কর্মচারীর তথ্য হালনাগাদ ফর্ম' ])
             @slot('body')
                 @if(!empty($id))
                     @form_upload(['route'=>['employee.update',$id]])
@@ -89,7 +94,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                     <div class="row">
                         <div class="col-xs-12 col-md-2 col-md-offset-5">
                             <label class="addImg">
-                                Employee Picture
+                                ছবি
                                 <span id="validimg"></span>
                                 <div class="image_preview" id="image_preview1" style="border: 1px dotted;padding: 10px 5px;width: 135px;">
                                     @if(!empty($img))
@@ -111,7 +116,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="form-group">
-                                        {!! Form::label('name','Employee Name') !!} <span style="color: red">*</span>
+                                        {!! Form::label('name','কর্মচারীর নাম') !!} <span style="color: red">*</span>
                                         {!! Form::text('name',$name,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'name',
@@ -124,7 +129,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('branch','Branch') !!} <span style="color: red">*</span>
+                                        {!! Form::label('branch','শাখা') !!} <span style="color: red">*</span>
                                         {!! Form::select('branch',$all_branch, $branch,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'country',
@@ -134,9 +139,9 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('designation','Employee Designation') !!} <span style="color: red">*</span>
+                                        {!! Form::label('designation','পদবী') !!} <span style="color: red">*</span>
                                         <div class="input-group" id="to_search">
-                                            {!! Form::select('designation',[],$designation,[
+                                            {!! Form::select('designation',$designation_value,$designation,[
                                                 'class'             =>  'form-control',
                                                 'id'                =>  'customers_select',
                                                 'style'             =>  'display: none;'
@@ -151,7 +156,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group" id="data_1">
-                                        {!! Form::label('dob','Date of birth:') !!} <span style="color: red">*</span>
+                                        {!! Form::label('dob','জন্ম তারিখ') !!} <span style="color: red">*</span>
                                         <div class="input-group date" style="">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -166,7 +171,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group" id="data_2">
-                                        {!! Form::label('joining_date','Joining date :') !!} <span style="color: red">*</span>
+                                        {!! Form::label('joining_date','যোগদান তারিখ') !!} <span style="color: red">*</span>
                                         <div class="input-group date" style="">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -183,7 +188,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('personal_mobile','Mobile (Personal)') !!} <span style="color: red">*</span>
+                                        {!! Form::label('personal_mobile','মোবাইল (ব্যক্তিগত)') !!} <span style="color: red">*</span>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone-square" aria-hidden="true"></i>
@@ -199,7 +204,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('alt_mobile','Mobile (Alternative)') !!}
+                                        {!! Form::label('alt_mobile','মোবাইল (বিকল্প)') !!}
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone-square" aria-hidden="true"></i>
@@ -216,7 +221,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('nid','NID/Passport/Driving Licence') !!}
+                                        {!! Form::label('nid','NID/পাসপোর্ট / ড্রাইভিং লাইসেন্স') !!}
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-id-card" aria-hidden="true"></i>
@@ -230,7 +235,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('email','Email') !!}
+                                        {!! Form::label('email','ইমেইল') !!}
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -248,7 +253,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('country','Country') !!} <span style="color: red">*</span>
+                                        {!! Form::label('country','দেশ') !!} <span style="color: red">*</span>
                                         {!! Form::select('country',$countries, $country,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'country',
@@ -258,7 +263,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('city','City') !!} <span style="color: red">*</span>
+                                        {!! Form::label('city','শহর') !!} <span style="color: red">*</span>
                                         {!! Form::text('city', $city,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'city',
@@ -271,7 +276,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('area','Area') !!} <span style="color: red">*</span>
+                                        {!! Form::label('area','এলাকায়') !!} <span style="color: red">*</span>
                                         {!! Form::text('area',$area,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'area',
@@ -282,7 +287,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('post_code','Post Code') !!}
+                                        {!! Form::label('post_code','পোস্ট কোড') !!}
                                         {!! Form::text('post_code',$post_code,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'post_code',
@@ -292,7 +297,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 </div>
                             </div>
                             <div class="form-group">
-                                {!! Form::label('house_address','House & Street Address') !!}
+                                {!! Form::label('house_address','বাড়ীর নাম ও ঠিকানা') !!}
                                 {!! Form::text('house_address',$house_address,[
                                     'class'         =>  'form-control',
                                     'id'            =>  'house_address',
@@ -300,7 +305,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                 ]) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('comment','Comment') !!}
+                                {!! Form::label('comment','মন্তব্য') !!}
                                 {!! Form::textarea('comment',$comment,[
                                     'class'         =>  'form-control',
                                     'rows'          =>  '5'
@@ -320,7 +325,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header" style="padding: 10px 15px;">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Add New Designation</h4>
+                    <h4 class="modal-title">নতুন পদবীর তথ্য ফর্ম</h4>
                 </div>
                 <form method="POST" action="{{route('employee.save_designation')}}" accept-charset="UTF-8" id="new_designation">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
@@ -343,7 +348,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="form-group">
-                                                {!! Form::label('name','Designation Name') !!} <span style="color: red">*</span>
+                                                {!! Form::label('name','পদবীর নাম') !!} <span style="color: red">*</span>
                                                 {!! Form::text('name',null,[
                                                     'class'         =>  'form-control',
                                                     'id'            =>  'name',
@@ -454,7 +459,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
             });
 
             $("#customers_select").select2({
-                placeholder: "search a designation",
+                placeholder: "পদবী",
                 allowClear: true,
                 ajax : {
                     url : '{{route('employee.search')}}',
@@ -477,7 +482,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                     }
                 },
                 minimumInputLength : 1,
-                width : '258px',
+                width : '205px',
                 templateResult : function (repo){
                     var img =  '';
                     return repo.name;

@@ -12,7 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-2 col-md-offset-10">
-            <a class="btn btn-primary pull-right" href="{{route('employee.new')}}" style="margin-bottom: 10px">Add Employee</a>
+            <a class="btn btn-primary pull-right" href="{{route('employee.new')}}" style="margin-bottom: 10px">নতুন কর্মচারী</a>
         </div>
     </div>
     <div class="row">
@@ -45,13 +45,13 @@
                 <table class="table table-bordered" id="employees_table" style="width: 100%">
                     <thead>
                     <tr>
-                        <th style="width: 10%">Picture</th>
-                        <th style="width: 15%">Name</th>
-                        <th style="width: 10%">Working Branch</th>
-                        <th style="width: 15%">Basic Info</th>
-                        <th style="width: 20%">Address</th>
-                        <th style="width: 20%">Action Info</th>
-                        <th style="text-align: right;width: 10%">Action</th>
+                        <th style="width: 10%">ছবি</th>
+                        <th style="width: 15%">নাম</th>
+                        <th style="width: 10%">কার্মরত শাখা</th>
+                        <th style="width: 15%">সাধারণ তথ্য</th>
+                        <th style="width: 20%">ঠিকানা</th>
+                        <th style="width: 20%">তৈরী/হালনাগাদ</th>
+                        <th style="text-align: right;width: 10%">অ্যাকশন</th>
                     </tr>
                     </thead>
                 </table>
