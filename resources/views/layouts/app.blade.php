@@ -63,6 +63,12 @@
         .view-all{
             padding: 0PX;
         }
+        .dataTables_filter{
+            text-align: right;
+        }
+        .pagination{
+            margin: 0px;float: right;
+        }
     </style>
     @yield('css')
 
@@ -104,7 +110,7 @@
                 <li>
                     <a class="{{(isset($active_menu) && $active_menu['name'] == 'dashboard' ) ? 'active' : '' }}" href="{{ url('/') }}">
                         <i class="fa fa-th-large"></i>
-                        <span class="nav-label">Dashboards</span>
+                        <span class="nav-label">ড্যাশবোর্ড</span>
                     </a>
                 </li>
 
@@ -136,6 +142,30 @@
                                     </ul>
                                 </li>
 
+                                <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'buy_settings' ) ? 'active': '' }}">
+                                    <a href="javascript:void(0)">
+                                        ক্রয় সেটিংস<span class="fa arrow"></span>
+                                    </a>
+                                    <ul class="nav nav-third-level">
+                                        <li class="{{ (isset($active_grandchild_menu) && $active_grandchild_menu['name'] == 'buy_categories' ) ? 'active': '' }}">
+                                            <a href="{{route('buysettings.category.all')}}">
+                                                ক্যাটাগরি 
+                                            </a>
+                                        </li>
+                                        <li class="{{ (isset($active_grandchild_menu) && $active_grandchild_menu['name'] == 'buy_products' ) ? 'active': '' }}">
+                                            <a href="{{route('buysettings.buyProducts.all')}}">
+                                                সকল ক্রয় পণ্যের নাম 
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'sells_settings' ) ? 'active': '' }}">
+                                    <a href="{{route('sellsProduct.all')}}">
+                                        পণ্য বিক্রি সেটিংস
+                                    </a>
+                                </li>
+
                                 <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'all_branch' ) ? 'active': '' }}">
                                     <a href="{{route('allBranch')}}">
                                         শাথা তৈরী করুন
@@ -147,30 +177,11 @@
                                     </a>
                                 </li>
 
-
-                            <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'choose_invoice' ) ? 'active': '' }}">
-                                <a href="{{route('chooseInvoice')}}">
-                                    Choose Invoice
-                                </a>
-                            </li>
-
                             @endif
                             @if(have_permission([1,2,3]))
-                                @if(have_permission([1,2]))
-                                    <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'customer_discount_type' ) ? 'active': '' }}">
-                                        <a href="{{route('allCustomersDiscount')}}">
-                                            Customer Discount Type
-                                        </a>
-                                    </li>
-                                    <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'customer_type' ) ? 'active': '' }}">
-                                        <a href="{{route('allCustomersType')}}">
-                                            Customer Type
-                                        </a>
-                                    </li>
-                                @endif
                                 <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'users' ) ? 'active': '' }}">
                                     <a href="{{route('allUsersInfo')}}">
-                                        Users
+                                        ব্যবহারকারী
                                     </a>
                                 </li>
                             @endif
@@ -254,7 +265,7 @@
                                     {{--all notifications--}}
                                 </ul>
                                 <div class="noit-footer bg-damal-green text-center">
-                                    <a href="{{route('Notifications')}}" class="text-light view-all">View All</a>
+                                    <a href="{{route('Notifications')}}" class="text-light view-all no-padding">View All</a>
                                 </div>
                             </div>
                         </li>

@@ -12,7 +12,7 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-md-offset-10 col-md-2">
-            <a class="btn btn-primary pull-right" style="margin-bottom: 20px" href="{{route('signUpForm')}}">Create User</a>
+            <a class="btn btn-primary pull-right" style="margin-bottom: 20px" href="{{route('signUpForm')}}">নতুন ব্যবহারকারী</a>
         </div>
     </div>
     <div class="row">
@@ -34,7 +34,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            @panelPrimary(['title'=>"user's Information"])
+            @panelPrimary(['title'=>"ব্যবহারকারীদের তথ্য"])
             @slot('body')
                 <div class="row">
                     <div class="col-xs-12">

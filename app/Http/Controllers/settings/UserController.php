@@ -152,7 +152,7 @@ class UserController extends Controller
             'active_grandchild_menu'    =>  ['name'=>'new_users','link'=> route('signUpForm')],
             'branches'                  =>  DB::table('branches')->where('status',0)->get(),
             'alerts'                    =>  [
-                'info'                  =>  'Fields with (*) are required.',
+                'warning'               =>  'তারকা (*) চিহ্নিত ফিল্ড গুলো অবশ্যই পূরণ করতে হবে',
             ],
         ]);
         if(have_permission([1,2,3])) {

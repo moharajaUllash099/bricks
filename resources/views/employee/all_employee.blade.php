@@ -99,7 +99,7 @@
                 "buttons":[
                     {
                         extend      :   'print',
-                        text        :   '<i class="fa fa-print" aria-hidden="true"></i> Print all info',
+                        text        :   '<i class="fa fa-print" aria-hidden="true"></i> Print all',
                         className   :   'btn btn-primary',
                         action: function (e, dt, button, config) {
                             window.location = '{{route('employee.print_info')}}';

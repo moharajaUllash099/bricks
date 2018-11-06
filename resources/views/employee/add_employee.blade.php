@@ -12,7 +12,7 @@ $default_country = (!empty(old('country'))) ? old('country') : 16;
 
 $all_branch = [
     ''      =>      'শাখা নির্বাচন করুন',
-    '0'     =>      'প্রাধান শাখা',
+    '0'     =>      'প্রধান শাখা',
 ];
 foreach ($branches as $b){
     $all_branch[$b->id] =  $b->name;

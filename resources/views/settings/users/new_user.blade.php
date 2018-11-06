@@ -25,10 +25,10 @@
     <div class="row">
         <crenter></crenter>
         <div class="col-xs-6 col-lg-offset-3 col-md-offset-3">
-            @panelPrimary(['title'=> 'CREATE new admin'])
+            @panelPrimary(['title'=> 'নতুন ব্যবহারকারী ফর্ম'])
                 @slot('body')
                     <div class="form-group">
-                        {!! Form::label('delivery_man','Search Employee:',['style'=>'display:block']) !!}
+                        {!! Form::label('delivery_man','কর্মচারী অনুসন্ধান করুন (নাম অথবা ফোন নম্বর দিয়ে)',['style'=>'display:block']) !!}
                         {!! Form::select('delivery_man',[],null,[
                             'class'             =>  'form-control',
                             'id'                =>  'employee_select',
@@ -38,7 +38,7 @@
                     @form_open(['route'=>'storeUserInfo'])
                         @slot('form_body')
                             <div class="form-group">
-                                {!! Form::label('name', 'Name') !!}
+                                {!! Form::label('name', 'নাম') !!}
                                 {!! Form::text('name',null,[
                                     'class'         =>  'form-control',
                                     'id'            =>  'name',
@@ -48,12 +48,12 @@
                                 ]) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('Select branch') !!}
+                                {!! Form::label('শাখা নির্বাচন') !!}
                                 <?php
-                                    $all_branch[''] = 'Select branch';
+                                    $all_branch[''] = 'শাখা নির্বাচন করুন';
 
                                     if(Auth::user()->role == 1 or Auth::user()->role ==2){
-                                        $all_branch['0']    = 'Principal branch';
+                                        $all_branch['0']    = 'প্রধান শাখা';
                                     }
 
                                     foreach ($branches as $br){
@@ -73,7 +73,7 @@
                                 ]) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('role','Choose User As') !!}
+                                {!! Form::label('role','ব্যবহারকারী হিসাবে নির্বাচন করুন') !!}
                                 @php
                                     $userRoles = array(
                                         ''  =>  'Select user role'
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('email','Email') !!}
+                                {!! Form::label('email','ইমেইল') !!}
                                 {!! Form::email('email',null,[
                                     'class'         =>  'form-control',
                                     'id'            =>  'email',
@@ -108,7 +108,7 @@
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('password','Password') !!}
+                                {!! Form::label('password','পাসওয়ার্ড') !!}
                                 {!! Form::password('password',[
                                     'class'         =>  'form-control',
                                     'id'            =>  'password',

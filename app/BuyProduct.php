@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CostItem extends Model
+class BuyProduct extends Model
 {
     protected $fillable = [
-        'name','category', 'is_deleted'
+        'name','category','is_deleted'
     ];
 }

@@ -52,9 +52,9 @@ if (!function_exists('get_author')){
     }
 }
 
-if (!function_exists('get_cat')){
-    function get_cat($id){
-        $info = DB::table('categories')->where('id', $id)->get();
+if (!function_exists('get_buy_cat')){
+    function get_buy_cat($id){
+        $info = DB::table('buy_categories')->where('id', $id)->get();
         if (isset($info[0])) {
             return $info[0]->name;
         }else{
@@ -66,6 +66,17 @@ if (!function_exists('get_cat')){
 if (!function_exists('get_cost_cat')){
     function get_cost_cat($id){
         $info = DB::table('cost_categories')->where('id', $id)->get();
+        if (isset($info[0])) {
+            return $info[0]->name;
+        }else{
+            return '';
+        }
+    }
+}
+
+if (!function_exists('get_buy_product')){
+    function get_buy_product($id){
+        $info = DB::table('buy_products')->where('id', $id)->get();
         if (isset($info[0])) {
             return $info[0]->name;
         }else{
@@ -155,7 +166,7 @@ if (!function_exists('get_branch_name')){
     function get_branch_name($id){
         if ($id == 0 ){
             //return 'Principal Branch';
-            return 'প্রাধান শাখা';
+            return 'প্রধান শাখা';
         }else{
             $role = DB::table('branches')->where('id', $id)->get();
             if(isset($role[0])){

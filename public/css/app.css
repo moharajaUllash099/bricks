@@ -5475,13 +5475,13 @@ a.forum-item-title:hover {
 .tabs-container .nav-tabs > li.active > a:focus {
   border: 1px solid #e7eaec;
   border-bottom-color: transparent;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .tabs-container .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
-  background-color: #fff !important;
+  /*background-color: #fff !important;*/
 }
 
 .tabs-container .tab-pane .panel-body {

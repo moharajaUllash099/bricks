@@ -40,10 +40,10 @@
         </thead>
         <tbody>
             <tr>
-                <td style="width: 20%">Picture</td>
-                <td style="width: 30%">Name & Basic Info</td>
-                <td style="width: 10%">Working Branch</td>
-                <td style="width: 40%">Address</td>
+                <td style="width: 20%">ছবি</td>
+                <td style="width: 30%">নাম এবং সাধারণ তথ্য</td>
+                <td style="width: 10%">কার্মরত শাখা</td>
+                <td style="width: 40%">ঠিকানা</td>
             </tr>
             @foreach($employees as $c)
                 <tr>
