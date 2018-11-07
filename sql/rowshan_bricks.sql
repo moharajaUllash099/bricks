@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2018 at 06:41 PM
+-- Generation Time: Nov 07, 2018 at 02:10 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -46,7 +46,7 @@ INSERT INTO `basic_settings` (`id`, `name`, `val`, `created_at`, `updated_at`) V
 (3, 'phone', '01716678168', NULL, NULL),
 (4, 'email', '', NULL, NULL),
 (5, 'currency', 'BDT', NULL, NULL),
-(6, 'print_auther_info', 'off', NULL, NULL),
+(6, 'print_auther_info', 'on', NULL, NULL),
 (7, 'permissible_branch', '2', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -468,7 +468,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2018_09_23_081758_create_employees_table', 4),
 (11, '2018_11_06_170856_create_buy_categories_table', 5),
 (12, '2018_11_06_194721_create_buy_products_table', 6),
-(13, '2018_11_06_223213_create_products_table', 7);
+(13, '2018_11_06_223213_create_products_table', 7),
+(16, '2018_11_07_122047_create_vendors_table', 8);
 
 -- --------------------------------------------------------
 
@@ -645,7 +646,15 @@ INSERT INTO `notifications` (`id`, `name`, `uid`, `role`, `msg`, `status`, `crea
 (151, 'Mr. Md. Masudzzaman', '1', '1', 'open a new product (দ্বিতীয় শ্রেণি) .', '1', '2018-11-06 16:52:24', NULL),
 (152, 'Mr. Md. Masudzzaman', '1', '1', 'open a new product (তৃতীয় শ্রেণি) .', '1', '2018-11-06 16:52:33', NULL),
 (153, 'Mr. Md. Masudzzaman', '1', '1', 'open a new product (আধলা) .', '1', '2018-11-06 16:52:43', NULL),
-(154, 'Mr. Md. Masudzzaman', '1', '1', 'open a new product (রাবিশ) .', '1', '2018-11-06 16:52:51', NULL);
+(154, 'Mr. Md. Masudzzaman', '1', '1', 'open a new product (রাবিশ) .', '1', '2018-11-06 16:52:51', NULL),
+(155, 'Mr. Md. Masudzzaman', '1', '1', 'Register a new Vendor ()', '1', '2018-11-07 06:37:22', NULL),
+(156, 'Mr. Md. Masudzzaman', '1', '1', 'Register a new Vendor ()', '1', '2018-11-07 06:57:28', NULL),
+(157, 'Mr. Md. Masudzzaman', '1', '1', 'update Vendor information ()', '1', '2018-11-07 10:00:02', NULL),
+(158, 'Mr. Md. Masudzzaman', '1', '1', 'update on general information (company)', '1', '2018-11-07 10:11:47', NULL),
+(159, 'Mr. Md. Masudzzaman', '1', '1', 'update on general information (phone)', '1', '2018-11-07 10:11:47', NULL),
+(160, 'Mr. Md. Masudzzaman', '1', '1', 'update on general information (email)', '1', '2018-11-07 10:11:47', NULL),
+(161, 'Mr. Md. Masudzzaman', '1', '1', 'update on general information (currency)', '1', '2018-11-07 10:11:47', NULL),
+(162, 'Mr. Md. Masudzzaman', '1', '1', 'update on general information (print_auther_info)', '1', '2018-11-07 10:11:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -727,7 +736,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('T6VEL3fi17LChx9kN46MJc9ZH4c76G3Ugw5LTjwo', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaGZYMzlVUlZLSnFmc3o4M3hjNzl5UkZ6bVZoWXpWdzhEQ2xJVHE5ayI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vbG9jYWxob3N0L2JyaWNrcy9wdWJsaWMvc2V0dGluZ3MvYnJhbmNoIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIyOiJQSFBERUJVR0JBUl9TVEFDS19EQVRBIjthOjA6e319', 1541526018);
+('Q4ZhETA1xHiSOL6Ncw0McLHsjn9W2jTdXuctYssG', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiNkN5bm45VjFqQkI3ajgxWXgxUmVsTlBRSWtkckJzQlVtaWNuUGJ0ZyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vbG9jYWxob3N0L2JyaWNrcy9wdWJsaWMvc2V0dGluZ3MvYnJhbmNoIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIyOiJQSFBERUJVR0JBUl9TVEFDS19EQVRBIjthOjA6e319', 1541589397);
 
 -- --------------------------------------------------------
 
@@ -756,7 +765,39 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `branch`, `activation_code`, `status`, `block`, `role`, `img`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Mr. Md. Masudzzaman', 'admin@admin.com', '$2y$10$i.21.xluapYRqV9hq8lAdO7.5ihl4V/8l6BcPWMWOcm/590lBrzAm', '0', NULL, 0, '0', '1', NULL, 'jkQ8Pr0xZwx8fp9CmRS4r11sIxLPoVxMvdFRj7Bc19xh925kkVhQsdy50joK', '2018-09-11 05:15:29', '2018-09-11 07:48:46');
+(1, 'Mr. Md. Masudzzaman', 'admin@admin.com', '$2y$10$i.21.xluapYRqV9hq8lAdO7.5ihl4V/8l6BcPWMWOcm/590lBrzAm', '0', NULL, 0, '0', '1', NULL, 'XFfSDaTIDoQlSjKA83axOw9C5ikVLHz3qqXdmEWSfyp2vMZewkW0UEz3tVtf', '2018-09-11 05:15:29', '2018-09-11 07:48:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendors`
+--
+
+CREATE TABLE `vendors` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `company_name` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `vendors_name` varchar(191) CHARACTER SET utf16 NOT NULL,
+  `personal_mobile` varchar(191) CHARACTER SET utf16 NOT NULL,
+  `alt_mobile` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `email` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `country` tinyint(4) NOT NULL,
+  `district` varchar(191) CHARACTER SET utf16 NOT NULL,
+  `area` varchar(191) CHARACTER SET utf16 NOT NULL,
+  `post_code` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `address` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `comment` varchar(191) CHARACTER SET utf16 DEFAULT NULL,
+  `cid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'createing user id',
+  `uid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'updating user id',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `company_name`, `vendors_name`, `personal_mobile`, `alt_mobile`, `email`, `country`, `district`, `area`, `post_code`, `address`, `comment`, `cid`, `uid`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'মাসুদ', '01723769900', NULL, NULL, 16, 'ঝিনাইদহ', 'শৈলকুপা', '7320', 'বাশবাড়ী', NULL, '1', '1', '2018-11-07 06:57:28', '2018-11-07 10:00:02');
 
 --
 -- Indexes for dumped tables
@@ -854,6 +895,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `vendors`
+--
+ALTER TABLE `vendors`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `vendors_personal_mobile_unique` (`personal_mobile`),
+  ADD UNIQUE KEY `vendors_email_unique` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -903,13 +952,13 @@ ALTER TABLE `employee_designations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -927,6 +976,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vendors`
+--
+ALTER TABLE `vendors`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
