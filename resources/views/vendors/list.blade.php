@@ -1,18 +1,14 @@
 @extends('layouts.app')
 @section('css')
     <style>
-        #employees_table_filter{
-            text-align: right;
-        }
-        .pagination{
-            margin: 0px;float: right;
-        }
+
     </style>
 @endsection
+
 @section('content')
     <div class="row">
-        <div class="col-xs-12 col-md-2 col-md-offset-10">
-            <a class="btn btn-primary pull-right" href="{{route('employee.new')}}" style="margin-bottom: 10px">নতুন কর্মচারী</a>
+        <div class="col-xs-12 col-md-1 col-md-offset-11">
+            <a href="{{route('vendor.new')}}" class="btn btn-sm btn-primary pull-right" style="margin-bottom: 15px">নতুন ব্যাপারী</a>
         </div>
     </div>
     <div class="row">
@@ -31,26 +27,19 @@
                 @alert(['alerts'=>['success_'=>session('success_')]])
                 @endalert
             @endif
-            {{--error msg--}}
-            @if(session('error_'))
-                @alert(['alerts'=>['error_'=>session('error_')]])
-                @endalert
-            @endif
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            @panelPrimary(['title'=>'কর্মচারীদের তথ্য'])
+            @panelPrimary(['title'=>'vendor list'])
             @slot('body')
-                <table class="table table-bordered" id="employees_table" style="width: 100%">
+                <table class="table table-bordered" id="vendor_table" style="width: 100%">
                     <thead>
                     <tr>
-                        <th style="width: 10%">ছবি</th>
-                        <th style="width: 15%">নাম</th>
-                        <th style="width: 10%">কার্মরত শাখা</th>
-                        <th style="width: 15%">সাধারণ তথ্য</th>
-                        <th style="width: 20%">ঠিকানা</th>
-                        <th style="width: 20%">তৈরী/হালনাগাদ</th>
+                        <th style="width: 25%">প্রতিষ্ঠানের/ব্যাপারীর নাম</th>
+                        <th style="width: 25%">সাধারণ তথ্য</th>
+                        <th style="width: 25%">ঠিকানা</th>
+                        <th style="width: 15%">তৈরী/হালনাগাদ</th>
                         <th style="text-align: right;width: 10%">অ্যাকশন</th>
                     </tr>
                     </thead>
@@ -60,6 +49,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
     <script type="text/javascript" src="{{ asset('soft/js/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('soft/js/datatables.bootstrap.js') }}"></script>
@@ -71,38 +61,28 @@
     <script>
         $(function() {
             window.LaravelDataTables=window.LaravelDataTables||{};
-            window.LaravelDataTables["dataTableBuilder"]=$("#employees_table").DataTable({
+            window.LaravelDataTables["dataTableBuilder"]=$("#vendor_table").DataTable({
                 "serverSide":true,
                 "processing":true,
                 "ajax":{
-                    "url" : '{{route('employee.all.datatable')}}',
+                    "url" : '{{route('vendor.datatable')}}',
                     "type": "GET"
                 },
                 "columns":[
-                    {data: 'img',"orderable":false,"searchable":false},
-                    {data: 'name',"orderable":true,"searchable":true},
-                    {data: 'branch',"orderable":true,"searchable":true},
+                    {data: 'company_name',"orderable":true,"searchable":true},
                     {data: 'personal_mobile',"orderable":true,"searchable":true},
-                    {data: 'country',"orderable":true,"searchable":true},
+                    {data: 'address',"orderable":true,"searchable":true},
                     {data: 'created_at',"orderable":true,"searchable":true},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
-                    //hidden
-                    /*{data:'alt_mobile',visible : false},
-                    {data:'nid',visible : false},
-                    {data:'email',visible : false},
-                    {data:'city',visible : false},
-                    {data:'area',visible : false},
-                    {data:'post_code',visible : false},
-                    {data:'house_address',visible : false}*/
                 ],
                 "dom":"Blfrtip",
                 "buttons":[
                     {
                         extend      :   'print',
-                        text        :   '<i class="fa fa-print" aria-hidden="true"></i> Print all',
+                        text        :   '<i class="fa fa-print" aria-hidden="true"></i> Print all info',
                         className   :   'btn btn-primary',
                         action: function (e, dt, button, config) {
-                            window.location = '{{route('employee.print_info')}}';
+                            window.location = '{{route('vendor.print_list')}}';
                         }
                     }
                 ]

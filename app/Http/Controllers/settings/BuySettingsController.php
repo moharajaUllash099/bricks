@@ -342,4 +342,12 @@ class BuySettingsController extends Controller
         }
     }
 
+    public function print_buy_product_list()
+    {
+        $this->addViewData([
+            'buy_item_list'     =>  BuyProduct::get(),
+        ]);
+        return view('settings.buysettings.print_buy_product_list')->with($this->viewData);
+    }
+
 }

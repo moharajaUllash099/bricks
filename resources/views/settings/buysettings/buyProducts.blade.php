@@ -129,20 +129,20 @@ $name = (isset($this_record[0])) ? $this_record[0]->name : old('name');
                 ],
                 "dom":"Blfrtip",
                 "buttons":[
-                    {
+                    /*{
                         extend      :   'pdf',
                         text        :   '<i class="fa fa-file-pdf-o" aria-hidden="true"></i> Download pdf',
                         className   :   'btn btn-primary',
                         action: function (e, dt, button, config) {
                             window.location = url+'product/download/pdf';
                         }
-                    },
+                    },*/
                     {
                         extend      :   'print',
                         text        :   '<i class="fa fa-print" aria-hidden="true"></i> Print',
                         className   :   'btn btn-primary',
                         action: function (e, dt, button, config) {
-                            window.location = url+'product/print_product_info';
+                            window.location = '{{route('buysettings.buyProducts.print_buy_product_list')}}';
                         }
                     }
                 ]

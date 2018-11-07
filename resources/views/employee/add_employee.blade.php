@@ -276,7 +276,7 @@ $id = (isset($this_record[0])) ? $this_record[0]->id : '';
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label('area','এলাকায়') !!} <span style="color: red">*</span>
+                                        {!! Form::label('area','এলাকা') !!} <span style="color: red">*</span>
                                         {!! Form::text('area',$area,[
                                             'class'         =>  'form-control',
                                             'id'            =>  'area',

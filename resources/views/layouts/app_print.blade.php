@@ -36,9 +36,6 @@
             right: 0;
         }
         /* Fix overflow of headers and content */
-        body {
-            padding-top: 45px;
-        }
         .custom-page-start {
             margin-top: 50px;
         }

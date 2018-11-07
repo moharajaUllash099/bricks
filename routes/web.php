@@ -108,6 +108,7 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('settings/buysettings/buyProducts/edit/{id}','settings\BuySettingsController@buyProductsEdit')->name('buysettings.buyProducts.edit');
     Route::get('settings/buysettings/buyProducts/deactivate/{id}','settings\BuySettingsController@productDeactivate')->name('buysettings.buyProducts.deactivate');
     Route::get('settings/buysettings/buyProducts/reactive/{id}','settings\BuySettingsController@productReactive')->name('buysettings.buyProducts.reactive');
+    Route::get('settings/buysettings/buyProducts/print_buy_product_list','settings\BuySettingsController@print_buy_product_list')->name('buysettings.buyProducts.print_buy_product_list');
 
 
     /*--------------------------|
@@ -122,4 +123,19 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('settings/sellSettings/edit/{id}','settings\SellSettingsController@edit')->name('sellsProduct.edit');
     Route::get('settings/sellSettings/deactivate/{id}','settings\SellSettingsController@deactivate')->name('sellsProduct.deactivate');
     Route::get('settings/sellSettings/reactive/{id}','settings\SellSettingsController@reactive')->name('sellsProduct.reactive');
+
+    /*--------------------------|
+    |   vendor_management       |
+    |--------------------------*/
+    Route::get('vendor/list','vendors\VendorsController@index')->name('vendor.list');
+    Route::get('vendor/datatable','vendors\VendorsController@datatable')->name('vendor.datatable');
+
+    Route::get('vendor/new','vendors\VendorsController@create')->name('vendor.new');
+    Route::get('vendor/edit/{id}','vendors\VendorsController@edit')->name('vendor.edit');
+
+    Route::post('vendor/save','vendors\VendorsController@store')->name('vendor.save');
+    Route::post('vendor/update/{id}','vendors\VendorsController@update')->name('vendor.update');
+
+    #print
+    Route::get('vendor/print_list','vendors\VendorsController@print_list')->name('vendor.print_list');
 });

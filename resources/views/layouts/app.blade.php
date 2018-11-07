@@ -107,11 +107,31 @@
                         BI
                     </div>
                 </li>
-                <li>
-                    <a class="{{(isset($active_menu) && $active_menu['name'] == 'dashboard' ) ? 'active' : '' }}" href="{{ url('/') }}">
+                <li class="{{(isset($active_menu) && $active_menu['name'] == 'dashboard' ) ? 'active' : '' }}">
+                    <a href="{{ url('/') }}">
                         <i class="fa fa-th-large"></i>
                         <span class="nav-label">ড্যাশবোর্ড</span>
                     </a>
+                </li>
+                {{--vendor--}}
+                <li class="{{(isset($active_menu) && $active_menu['name'] == 'vendor_management' ) ? 'active' : '' }}">
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                        <span class="nav-label">ব্যাপারীদের তথ্য</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'vendor_list' ) ? 'active': '' }}">
+                            <a href="{{route('vendor.list')}}">
+                                ব্যাপারীদের তালিকা
+                            </a>
+                        </li>
+                        <li class="{{ (isset($active_child_menu) && $active_child_menu['name'] == 'new_vendor' ) ? 'active': '' }}">
+                            <a href="{{route('vendor.new')}}">
+                                নতুন ব্যাপারী
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 {{--Settings--}}

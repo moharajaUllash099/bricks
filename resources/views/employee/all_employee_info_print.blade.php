@@ -15,36 +15,25 @@
 @section('content')
     <table class="conpany-info" style="width: 100%">
         <thead>
-        <tr>
-            <th colspan="4">
-                <h3>{{get_basic_setting('company')}}</h3>
-                {!! get_basic_setting('address') !!}
-                <h5>Phone : {{get_basic_setting('phone')}}</h5>
-                <br>
-            </th>
-        </tr>
-        <?php $print_auther_info = get_basic_setting('print_auther_info'); ?>
-        @if($print_auther_info == 'on')
             <tr>
                 <th colspan="4">
-                    @if(isset($branch_info[0]))
-                        <p style="border: 1px solid black; width: 15%; margin: 10px auto;">This copy printed form</p>
-                        <h5>{{$branch_info[0]->name}}</h5>
-                        {!! $branch_info[0]->address !!}
-                        <h6>phone : {{ $branch_info[0]->phone }}</h6>
+                    <h3 style="margin-top: 5px">{{get_basic_setting('company')}}</h3>
+                    {!! get_basic_setting('address') !!}
+                    <h5>Phone : {{get_basic_setting('phone')}}</h5>
+                    <?php $print_auther_info = get_basic_setting('print_auther_info'); ?>
+                    @if($print_auther_info == 'on')
+                        <h6 style="text-align: center">printed by : {{Auth::user()->name}}</h6>
                     @endif
-                    <h6 style="text-align: center">printed by : {{Auth::user()->name}}</h6>
                 </th>
             </tr>
-        @endif
+            <tr>
+                <th style="width: 20%;border: 1px solid black;">ছবি</th>
+                <th style="width: 30%;border: 1px solid black;">নাম এবং সাধারণ তথ্য</th>
+                <th style="width: 10%;border: 1px solid black;">কার্মরত শাখা</th>
+                <th style="width: 40%;border: 1px solid black;">ঠিকানা</th>
+            </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="width: 20%">ছবি</td>
-                <td style="width: 30%">নাম এবং সাধারণ তথ্য</td>
-                <td style="width: 10%">কার্মরত শাখা</td>
-                <td style="width: 40%">ঠিকানা</td>
-            </tr>
             @foreach($employees as $c)
                 <tr>
                     <td>
